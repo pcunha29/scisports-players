@@ -14,7 +14,8 @@
         class="d-flex"
       >
         <v-card
-          class="mb-10 transparent"
+          v-on="$listeners"
+          class="mb-10"
           width="100%"
           max-width="330px"
           min-height="150px"
@@ -36,6 +37,11 @@
             <p><strong>Position: </strong>{{ player.position }}</p>
             <p><strong>Age: </strong>{{ player.age }}</p>
           </v-card-text>
+          <v-card-actions>
+            <v-btn right elevation="2" @click="OnPlayerSelected(player)">
+              Choose Player
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -46,6 +52,8 @@
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import CountryFlag from "vue-country-flag";
 import { PlayersInfo } from "../models";
+import VueCookies from "vue-cookies";
+Vue.use(VueCookies);
 
 @Component({
   components: { CountryFlag },
@@ -53,8 +61,13 @@ import { PlayersInfo } from "../models";
 export default class SelectPlayer extends Vue {
   @Prop() selectedPlayers!: string[];
   @Prop() playersInfo!: PlayersInfo[];
-
+  cookies = VueCookies;
   public players: PlayersInfo[] = [];
+
+  OnPlayerSelected(player: PlayersInfo[]) {
+    console.log(player);
+    this.$cookies.set("selectedPlayer", player);
+  }
 
   @Watch("selectedPlayers")
   filterPlayers() {

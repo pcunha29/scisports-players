@@ -14,8 +14,12 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn href="https://github.com/pcunha29" target="_blank" text>
-      <span class="mr-2">Check my repository</span>
+    <v-btn
+      href="https://github.com/pcunha29/scisports-players"
+      target="_blank"
+      text
+    >
+      <span class="mr-2">Check repository</span>
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
   </v-app-bar>
